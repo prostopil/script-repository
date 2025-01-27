@@ -1,2 +1,0 @@
-# script-repository
-репозиторий скриптов
