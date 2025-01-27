@@ -1,0 +1,134 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Script Repository</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Script Repository</h1>
+      <nav>
+        <button id="addNewBtn">Добавить скрипт</button>
+        <div class="search">
+          <input type="text" id="searchInput" placeholder="Поиск скриптов...">
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="categories-container">
+        <div class="categories-tabs">
+          <button class="category-tab active" data-category="all">Все скрипты</button>
+          <button class="category-tab" data-category="networks">Сети</button>
+          <button class="category-tab" data-category="servers">Серверы</button>
+          <button class="category-tab" data-category="devices">Устройства</button>
+        </div>
+
+        <div class="subcategories">
+          <div class="subcategory-group" data-category="networks">
+            <button class="subcategory-btn" data-subcategory="mikrotik">MikroTik</button>
+            <button class="subcategory-btn" data-subcategory="vpn">VPN</button>
+          </div>
+          <div class="subcategory-group" data-category="servers">
+            <button class="subcategory-btn" data-subcategory="linux">Linux</button>
+            <button class="subcategory-btn" data-subcategory="docker">Docker</button>
+          </div>
+          <div class="subcategory-group" data-category="devices">
+            <button class="subcategory-btn" data-subcategory="routers">Роутеры</button>
+            <button class="subcategory-btn" data-subcategory="switches">Коммутаторы</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="scriptStats" class="script-stats"></div>
+
+      <div class="filter-chips" id="filterChips"></div>
+
+      <div id="scriptsList" class="scripts-list"></div>
+
+      <div class="server-section">
+        <h2>Серверы для деплоя</h2>
+        <div class="form-group">
+          <div class="server-credentials">
+            <input type="url" id="serverUrl" placeholder="https://your-server.com/deploy">
+            <input type="text" id="serverUsername" placeholder="Username">
+            <input type="password" id="serverPassword" placeholder="Password">
+          </div>
+          <button id="addServer">Добавить сервер</button>
+        </div>
+        <div id="serverList" class="server-list"></div>
+      </div>
+    </main>
+
+    <!-- Modal for adding/editing scripts -->
+    <div id="scriptModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">Добавить скрипт</h2>
+        <form id="scriptForm">
+          <div class="form-group">
+            <label for="scriptTitle">Название:</label>
+            <input type="text" id="scriptTitle" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="scriptCategory">Категория:</label>
+            <select id="scriptCategory" required>
+              <optgroup label="Сети">
+                <option value="networks:mikrotik">MikroTik</option>
+                <option value="networks:vpn">VPN</option>
+              </optgroup>
+              <optgroup label="Серверы">
+                <option value="servers:linux">Linux</option>
+                <option value="servers:docker">Docker</option>
+              </optgroup>
+              <optgroup label="Устройства">
+                <option value="devices:routers">Роутеры</option>
+                <option value="devices:switches">Коммутаторы</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="scriptDescription">Описание:</label>
+            <textarea id="scriptDescription" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="scriptContent">Код:</label>
+            <textarea id="scriptContent" class="code-editor" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="scriptTags">Теги (через запятую):</label>
+            <input type="text" id="scriptTags">
+          </div>
+
+          <div class="form-group">
+            <label for="scriptTarget">Целевое устройство/сервер:</label>
+            <input type="text" id="scriptTarget" placeholder="Например, Router-01 или server.example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="versionComment">Комментарий к версии:</label>
+            <input type="text" id="versionComment" placeholder="Опишите изменения в этой версии">
+          </div>
+
+          <button type="submit">Сохранить</button>
+        </form>
+
+        <div id="versionHistory" class="version-history" style="display: none;">
+          <h3>История версий</h3>
+          <div id="versionsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>
